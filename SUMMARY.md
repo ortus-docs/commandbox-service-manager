@@ -1,4 +1,5 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [CommandBox Service Manager](README.md)
+* [Untitled](untitled.md)
 
