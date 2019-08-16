@@ -1,16 +1,40 @@
 # CommandBox Service Manager
 
-This module adds the ability for CommandBox to help you create and manage services for your servers.
+This module adds the ability for CommandBox to help you create and manage services for your CommandBox servers.
 
-### Installation
+![](.gitbook/assets/capture1.PNG)
 
-Install the module like so:
+## Purchasing
+
+This module is a commercial module by Ortus Solutions. You can purchase it here: [https://www.ortussolutions.com/products/commandbox-service-manager](https://www.ortussolutions.com/products/commandbox-service-manager)
+
+{% hint style="info" %}
+Once purchased we will add your FORGEBOX user to the Service Manager package as a collaborator so you can install, update and use it.
+{% endhint %}
+
+## Installation
+
+Once you have been added as a collaborator, you can install the module like so:
 
 ```bash
-install commandbox-service-manager
+install commandbox-service-manager@ortus
 ```
 
-### Usage
+The module will be installed as a global/system CommandBox module.  You can update all your system modules or just the service manager like so:
+
+```bash
+# Check and update all system dependencies
+update --system
+# Update only the service manager
+update commandbox-service-manager@ortus --system
+
+# List all system dependencies
+list --system
+# Check for oudated dependencies
+outdated --system
+```
+
+## Usage
 
 Here is an overview of the new commands this module adds into CommandBox for you.
 
@@ -113,8 +137,8 @@ Note, the `standardOutPath` and `errorOutPath` can be absolute or relative. When
 ### Supported OS's
 
 * Windows 
-* Mac - coming soon
-* Linux - coming soon
+* Linux - Under Development
+* Mac - Coming Soon.
 
 ### Bullet Train
 
