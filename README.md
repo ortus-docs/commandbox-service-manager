@@ -7,7 +7,7 @@ This module adds the ability for CommandBox to help you create and manage servic
 ### Supported OS's
 
 * Windows 
-* Linux - Under Development
+* Linux \(systemd\)
 * Mac - Coming Soon.
 
 

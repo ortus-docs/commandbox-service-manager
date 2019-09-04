@@ -22,7 +22,7 @@ If you provide no params, by default, the commands will find the server in that 
 
 #### `server service create`
 
-Create a new service. To customize the service, pass params, set values in your `server.json` or set global config defaults. Use `--start` to also start the serviec after creating it.
+Create a new service. To customize the service, pass params, set values in your `server.json` or set global config defaults. Use `--start` to also start the service after creating it.
 
 #### `server service remove`
 
