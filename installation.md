@@ -1,6 +1,18 @@
 # Installation
 
-Once you have been granted access to the package on ForgeBox, you can install the module like so:
+Once you have been granted access to the package on ForgeBox, you will be able to install the module from your CommandBox CLI.  Check and make sure you are logged into the CLI with your ForgeBox account.
+
+```text
+forgebox whoami
+```
+
+If you're not logged in, you can authenticate like so:
+
+```text
+forgebox login
+```
+
+Now you're ready to install the Service Manager module!
 
 ```bash
 install commandbox-service-manager@ortus
