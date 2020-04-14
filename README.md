@@ -8,7 +8,7 @@ This module adds the ability for CommandBox to help you create and manage servic
 
 * Windows 
 * Linux \(systemd\)
-* Mac - Coming Soon.
+* Mac
 
 
 
