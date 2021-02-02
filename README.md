@@ -4,13 +4,9 @@ This module adds the ability for CommandBox to help you create and manage servic
 
 ![](.gitbook/assets/capture1.PNG)
 
-### Supported OS's
+## Supported OS's
 
 * Windows 
 * Linux \(systemd\)
 * Mac
-
-
-
-
 

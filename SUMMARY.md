@@ -6,4 +6,5 @@
 * [Usage](usage.md)
 * [Configuration](configuration.md)
 * [Bullet Train Integration](bullet-train-integration.md)
+* [Discussion & Help](discussion-and-help.md)
 
