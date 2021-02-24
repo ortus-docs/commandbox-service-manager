@@ -7,20 +7,20 @@ Each operating system may vary on which config items they choose to support.
 You can provide configuration to the `server service create` and `server service update` commands as CLI parameters like so:
 
 ```bash
-server service create exitAction=auto standardOutPath=logs/out.txt
+server service create startType=auto standardOutPath=logs/out.txt
 ```
 
 Or you can put them in your `server.json` like so:
 
 ```bash
-server set service.exitAction=auto
+server set service.startType=auto
 server set service.standardOutPath=logs/out.txt
 ```
 
 Or you can set them as global defaults for all services like so:
 
 ```bash
-config set server.defaults.service.exitAction=auto
+config set server.defaults.service.startType=auto
 config set server.defaults.service.standardOutPath=logs/out.txt
 ```
 
