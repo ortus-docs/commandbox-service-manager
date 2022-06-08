@@ -45,3 +45,6 @@ Hit Ctrl-C to stop it.  Now, create a service out of.
 task service create --start
 ```
 
+{% hint style="warning" %}
+Warning: if you don't create a task that keeps running forever, the service will just restart your task every time it stops (the default exit action is `restart`.  This will use a lot more CPU than you want!
+{% endhint %}
