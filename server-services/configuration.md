@@ -27,7 +27,7 @@ config set server.defaults.service.standardOutPath=logs/out.txt
 * **serviceName** - The name/ID of the service
 * **displayName** - The human readable name of the service
 * **description** - The description of the service
-* **username** - The username to run as.  On Windows, format of `domain\user` or `machine\login`
+* **username** - The username to run as.  On Windows, format of `domain\user` or `machine\login`.  On macOS only a system daemon \(created as root\) can run as another account - a per-user agent always runs as the user that created it, and asking for another account is an error.
 * **password** - The password of the user above _\(Windows only\)_
 * **startType** - one of the strings `auto`, `delayed`, `ondemand`, `disabled`
 * **dependOnGroup** - An array of service groups that need started first.  Comma-delimited list when passed the CLI _\(Windows only\)_
@@ -36,9 +36,10 @@ config set server.defaults.service.standardOutPath=logs/out.txt
 * **CPUAffinity** - The string "all" or CPU IDs, starting from 0 such as "0-2,4" which would use the first, second, third, and 5th CPU core. _\(Windows only\)_
 * **exitAction** - One of the strings `Restart`, `Ignore`, `Exit`
 * **restartDelayMS** - Number of milliseconds to delay restart when `exitAction` is `restart`. 
+* **lockConfig** - When `true`, the CommandBox start-script generation is skipped on every start after the first, as long as the script already exists.  That makes starts and restarts faster, at the cost of skipping the work CommandBox normally redoes on each start \(engine check, cfconfig, etc.\).
 * **restartThrottleMS** - Throttles how quickly to restart if the app runs for only a short time. Set the number of milliseconds for this threshold. _\(Windows only\)_
-* **standardOutPath** - Path to a file to write the "out" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  _\(Windows only\)_
-* **errorOutPath** - Path to a file to write the "error" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  Can be set to the same path as the "out" log. _\(Windows only\)_
+* **standardOutPath** - Path to a file to write the "out" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  Read back with `server service log`.  _\(Windows and macOS; on Linux the journal is used instead\)_
+* **errorOutPath** - Path to a file to write the "error" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  Can be set to the same path as the "out" log.  Read back with `server service log --error`.  _\(Windows and macOS; on Linux the journal is used instead\)_
 * **rotateLog** - true/false to enable log rotation _\(Windows only\)_
 * **rotateLogOnline** - true/false to enable log rotation while service is running as opposed to only during a restart. _\(Windows only\)_
 * **rotateLogSeconds** - Number of seconds between log rotations. _\(Windows only\)_
@@ -55,6 +56,8 @@ On Linux, the systemd journal will be used for the server out.  Any issues with 
 ```bash
 journalctl -u nameOfService
 ```
+
+The same output is available through `server service log`, which runs journalctl for you and passes `-n`, `-f` and `-p err` from its `lines`, `--follow` and `--error` arguments.
 
 
 

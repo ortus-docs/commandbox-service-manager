@@ -10,6 +10,7 @@ server service start
 server service stop
 server service restart
 server service status
+server service log
 ```
 
 Each of the `server service XXX` commands above accept the same three parameters that every other server command accepts.
@@ -25,7 +26,7 @@ If you provide no params, by default, the commands will find the server in that 
 Create a new service. To customize the service, pass params, set values in your `server.json` or set global config defaults. Use `--start` to also start the service after creating it.
 
 {% hint style="warning" %}
-Note: you must be using an **Administrator** user \(Windows\) or **root** \(\*nix\) to create services. You can start box as such, but keep in mind on \*nix, this changes your runtime user, and thus your CommandBox home.
+Note: on Windows and Linux you must be an **Administrator** user \(Windows\) or **root** \(\*nix\) to create services. You can start box as such, but keep in mind on \*nix, this changes your runtime user, and thus your CommandBox home. On macOS a service created as a normal user is a per-user agent and needs no elevation at all; creating a system daemon \(`sudo`\) follows the same rule as \*nix.
 {% endhint %}
 
 #### `server service remove`
@@ -51,6 +52,31 @@ Restart a service
 #### `server service status`
 
 Get status information for a service. Use `--verbose` to get additional information.
+
+#### `server service log`
+
+Show what the service has written to its log.
+
+```bash
+# the whole output log
+server service log
+
+# follow the output log, starting a few lines back
+server service log --follow
+
+# the whole error log
+server service log --error
+
+# follow the error log
+server service log --error --follow
+
+# just the last 50 lines of the output log
+server service log lines=50
+```
+
+Omit `lines` to show the whole log, and pass `lines=0` to show nothing.
+
+On Windows and macOS the output is read from the `standardOutPath` / `errorOutPath` files the service was created with, so a service without those settings has nothing to show and the command tells you how to add them. On Linux a systemd service writes to the journal, so the command runs `journalctl -u <serviceName>` and passes `-n`, `-f` and `-p err` through, showing whatever journalctl returns.
 
 ## CommandBox Home
 
