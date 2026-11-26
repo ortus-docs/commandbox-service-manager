@@ -10,6 +10,7 @@ task service start
 task service stop
 task service restart
 task service status
+task service log
 ```
 
 Each of the `task service XXX` commands above accept the `taskFile` parameter that points to the Task Runner. &#x20;
@@ -49,6 +50,31 @@ Restart a service
 #### `server service status`
 
 Get status information for a service. Use `--verbose` to get additional information.
+
+#### `task service log`
+
+Show what the task service has written to its log. It works exactly like [`server service log`](../server-services/usage.md), including the `taskFile` parameter.
+
+```bash
+# the whole output log
+task service log
+
+# follow the output log, starting a few lines back
+task service log --follow
+
+# the whole error log
+task service log --error
+
+# follow the error log
+task service log --error --follow
+
+# just the last 50 lines of the output log
+task service log lines=50
+```
+
+Omit `lines` to show the whole log, and pass `lines=0` to show nothing.
+
+On Windows and macOS the output is read from the `standardOutPath` / `errorOutPath` files the service was created with, so a service without those settings has nothing to show and the command tells you how to add them. On Linux a systemd service writes to the journal, so the command runs `journalctl -u <serviceName>` and passes `-n`, `-f` and `-p err` through, showing whatever journalctl returns.
 
 ## CommandBox Home
 

@@ -39,8 +39,8 @@ The same settings available to server services also work for task services.
 * **exitAction** - One of the strings `Restart`, `Ignore`, `Exit`
 * **restartDelayMS** - Number of milliseconds to delay restart when `exitAction` is `restart`.&#x20;
 * **restartThrottleMS** - Throttles how quickly to restart if the app runs for only a short time. Set the number of milliseconds for this threshold. _(Windows only)_
-* **standardOutPath** - Path to a file to write the "out" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  _(Windows only)_
-* **errorOutPath** - Path to a file to write the "error" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  Can be set to the same path as the "out" log. _(Windows only)_
+* **standardOutPath** - Path to a file to write the "out" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  Read back with `task service log`.  _(Windows and macOS; on Linux the journal is used instead)_
+* **errorOutPath** - Path to a file to write the "error" logs. Similar to the `server log` but also includes the raw output of the `server start` command itself.  Useful for debugging failed starts.  Can be set to the same path as the "out" log.  Read back with `task service log --error`. _(Windows and macOS; on Linux the journal is used instead)_
 * **rotateLog** - true/false to enable log rotation _(Windows only)_
 * **rotateLogOnline** - true/false to enable log rotation while service is running as opposed to only during a restart. _(Windows only)_
 * **rotateLogSeconds** - Number of seconds between log rotations. _(Windows only)_
@@ -56,3 +56,5 @@ On Linux, the systemd journal will be used for the server out. Any issues with s
 ```bash
 journalctl -u nameOfService
 ```
+
+The same output is available through `task service log`, which runs journalctl for you and passes `-n`, `-f` and `-p err` from its `lines`, `--follow` and `--error` arguments.
